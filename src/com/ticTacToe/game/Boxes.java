@@ -17,6 +17,7 @@ public class Boxes
 	private BufferedImage boxImage;
 	private int x;
 	private int y;
+	private boolean isHovering;
 	
 	public Boxes(String type, int x, int y)
 	{
@@ -24,6 +25,7 @@ public class Boxes
 		this.x = x;
 		this.y = y;
 		font = new Font("", Font.BOLD, 50);
+		isHovering = false;
 		
 		boxImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		drawBox();
@@ -31,6 +33,20 @@ public class Boxes
 	
 	public void render(Graphics2D g)
 	{
+		if(isHovering)
+		{
+			Graphics2D g2d = (Graphics2D) boxImage.getGraphics();
+			
+			g2d.setColor(Color.YELLOW);
+			g2d.fillRect(0, 0, WIDTH, HEIGHT);
+		}
+		else
+		{
+			Graphics2D g2d = (Graphics2D) boxImage.getGraphics();
+			
+			g2d.setColor(Color.BLACK);
+			g2d.fillRect(0, 0, WIDTH, HEIGHT);
+		}
 		g.drawImage(boxImage, x, y, null);
 	}
 	
@@ -69,4 +85,20 @@ public class Boxes
 		
 		g.dispose();
 	}
+	
+	public void isHovering(boolean isHovering)
+	{
+		this.isHovering = isHovering;
+	}
+	
+	public int getX()
+	{
+		return x;
+	}
+	
+	public int getY()
+	{
+		return y;
+	}
+	
 }

@@ -46,11 +46,8 @@ public class GameBoard
 			{
 				int x = SPACING + SPACING * col + Boxes.WIDTH * col;
 				int y = SPACING + SPACING * row + Boxes.HEIGHT * row;
-				
-				if(col % 2 == 0)
-					boxes.add(new Boxes("X", x, y));
-				else
-					boxes.add(new Boxes("O", x, y));
+
+				boxes.add(new Boxes("null", x, y));
 			}
 		}
 		
@@ -72,5 +69,6 @@ public class GameBoard
 		g2d.dispose();
 		
 	}
+	
 	
 }
