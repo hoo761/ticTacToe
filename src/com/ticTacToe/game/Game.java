@@ -100,11 +100,35 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	
 	// MOUSE LISTENER \\
 	
+	@Override
+	public void mouseMoved(MouseEvent e) 
+	{
+		for(int j = 0; j < 9; j ++)
+		{
+			GameBoard.boxes.get(j).isHovering(false);
+			
+			if(e.getX() > GameBoard.boxes.get(j).getX() + 80 && e.getX() < GameBoard.boxes.get(j).getX() + 180
+					&& e.getY() > GameBoard.boxes.get(j).getY() + 130 && e.getY() < GameBoard.boxes.get(j).getY() + 230)
+			{
+				GameBoard.boxes.get(j).isHovering(true);
+			}
+		}
+	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		
+		for(int j = 0; j < 9; j ++)
+		{
+			GameBoard.boxes.get(j).hasClicked(false);
+			
+			if(e.getX() > GameBoard.boxes.get(j).getX() + 80 && e.getX() < GameBoard.boxes.get(j).getX() + 180
+					&& e.getY() > GameBoard.boxes.get(j).getY() + 130 && e.getY() < GameBoard.boxes.get(j).getY() + 230)
+			{
+				GameBoard.boxes.get(j).hasClicked(true);
+				System.out.println("box" + j);
+			}
+		}
 	}
 
 	@Override
@@ -137,22 +161,5 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		
 	}
 	
-	@Override
-	public void mouseMoved(MouseEvent e) 
-	{
-		for(int j = 0; j < 9; j ++)
-		{
-			GameBoard.boxes.get(j).isHovering(false);
-			
-			if(e.getX() > GameBoard.boxes.get(j).getX() + 80 && e.getX() < GameBoard.boxes.get(j).getX() + 180
-					&& e.getY() > GameBoard.boxes.get(j).getY() + 130 && e.getY() < GameBoard.boxes.get(j).getY() + 230)
-			{
-				GameBoard.boxes.get(j).isHovering(true);
-			}
-			
-		}
-		
-		
-	}
 }
 

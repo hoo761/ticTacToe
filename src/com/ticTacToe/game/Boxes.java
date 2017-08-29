@@ -18,6 +18,9 @@ public class Boxes
 	private int x;
 	private int y;
 	private boolean isHovering;
+	private boolean oTurn;
+	private boolean xTurn;
+	private boolean hasClicked;
 	
 	public Boxes(String type, int x, int y)
 	{
@@ -89,6 +92,21 @@ public class Boxes
 	public void isHovering(boolean isHovering)
 	{
 		this.isHovering = isHovering;
+	}
+	
+	public void hasClicked(boolean hasClicked)
+	{
+		this.hasClicked = hasClicked;
+	}
+	
+	public void xTurn(boolean xTurn)
+	{
+		this.xTurn = xTurn;
+	}
+	
+	public void oTurn(boolean oTurn)
+	{
+		this.oTurn = oTurn;
 	}
 	
 	public int getX()
