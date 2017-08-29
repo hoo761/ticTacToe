@@ -140,67 +140,19 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	@Override
 	public void mouseMoved(MouseEvent e) 
 	{
-		if(e.getX() > GameBoard.boxes.get(0).getX() + 80 && e.getX() < GameBoard.boxes.get(0).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(0).getY() + 130 && e.getY() < GameBoard.boxes.get(0).getY() + 230)
+		for(int j = 0; j < 9; j ++)
 		{
-			GameBoard.boxes.get(0).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(1).getX() + 80 && e.getX() < GameBoard.boxes.get(1).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(1).getY() + 130 && e.getY() < GameBoard.boxes.get(1).getY() + 230)
-		{
-			GameBoard.boxes.get(1).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(2).getX() + 80 && e.getX() < GameBoard.boxes.get(2).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(2).getY() + 130 && e.getY() < GameBoard.boxes.get(2).getY() + 230)
-		{	
-			GameBoard.boxes.get(2).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(3).getX() + 80 && e.getX() < GameBoard.boxes.get(3).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(3).getY() + 130 && e.getY() < GameBoard.boxes.get(3).getY() + 230)
-		{
-			GameBoard.boxes.get(3).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(4).getX() + 80 && e.getX() < GameBoard.boxes.get(4).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(4).getY() + 130 && e.getY() < GameBoard.boxes.get(4).getY() + 230)
-		{
-			GameBoard.boxes.get(4).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(5).getX() + 80 && e.getX() < GameBoard.boxes.get(5).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(5).getY() + 130 && e.getY() < GameBoard.boxes.get(5).getY() + 230)
-		{
-			GameBoard.boxes.get(5).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(6).getX() + 80 && e.getX() < GameBoard.boxes.get(6).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(6).getY() + 130 && e.getY() < GameBoard.boxes.get(6).getY() + 230)
-		{
-			GameBoard.boxes.get(6).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(7).getX() + 80 && e.getX() < GameBoard.boxes.get(7).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(7).getY() + 130 && e.getY() < GameBoard.boxes.get(7).getY() + 230)
-		{
-			GameBoard.boxes.get(7).isHovering(true);
-		}
-		
-		else if(e.getX() > GameBoard.boxes.get(8).getX() + 80 && e.getX() < GameBoard.boxes.get(8).getX() + 180
-				&& e.getY() > GameBoard.boxes.get(8).getY() + 130 && e.getY() < GameBoard.boxes.get(8).getY() + 230)
-		{
-			GameBoard.boxes.get(8).isHovering(true);
-		
-		}
-		else
-		{
-			for(int i = 0; i < 9; i ++)		// Resets the "isHovering" boolean
+			GameBoard.boxes.get(j).isHovering(false);
+			
+			if(e.getX() > GameBoard.boxes.get(j).getX() + 80 && e.getX() < GameBoard.boxes.get(j).getX() + 180
+					&& e.getY() > GameBoard.boxes.get(j).getY() + 130 && e.getY() < GameBoard.boxes.get(j).getY() + 230)
 			{
-				GameBoard.boxes.get(i).isHovering(false);
+				GameBoard.boxes.get(j).isHovering(true);
 			}
+			
 		}
+		
+		
 	}
 }
 
