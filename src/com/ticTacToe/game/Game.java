@@ -17,10 +17,11 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	private static final long serialVersionUID = 1L;
 	public static final int WINDOW_WIDTH = 500;
 	public static final int WINDOW_HEIGHT = 550;
+	public static final int GAMEBOARD_X = 80;
+	public static final int GAMEBOARD_Y = 130;
 	public static final Font main = new Font("Times New Roman", Font.PLAIN, 28);
 
 	private Thread game;
-	private Boxes box;
 	private GameBoard board;
 	private BufferedImage image = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private boolean running;
@@ -34,7 +35,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
-		board = new GameBoard(80, 130);
+		board = new GameBoard(GAMEBOARD_X, GAMEBOARD_Y);
 	}
 	
 	public void update()
@@ -107,8 +108,8 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		{
 			GameBoard.boxes.get(j).isHovering(false);
 			
-			if(e.getX() > GameBoard.boxes.get(j).getX() + 80 && e.getX() < GameBoard.boxes.get(j).getX() + 180
-					&& e.getY() > GameBoard.boxes.get(j).getY() + 130 && e.getY() < GameBoard.boxes.get(j).getY() + 230)
+			if(e.getX() > GameBoard.boxes.get(j).getX() + GAMEBOARD_X && e.getX() < GameBoard.boxes.get(j).getX() + Boxes.WIDTH + GAMEBOARD_X
+					&& e.getY() > GameBoard.boxes.get(j).getY() + GAMEBOARD_Y && e.getY() < GameBoard.boxes.get(j).getY() + Boxes.WIDTH + GAMEBOARD_Y)
 			{
 				GameBoard.boxes.get(j).isHovering(true);
 			}
@@ -122,8 +123,8 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		{
 			GameBoard.boxes.get(j).hasClicked(false);
 			
-			if(e.getX() > GameBoard.boxes.get(j).getX() + 80 && e.getX() < GameBoard.boxes.get(j).getX() + 180
-					&& e.getY() > GameBoard.boxes.get(j).getY() + 130 && e.getY() < GameBoard.boxes.get(j).getY() + 230)
+			if(e.getX() > GameBoard.boxes.get(j).getX() + GAMEBOARD_X && e.getX() < GameBoard.boxes.get(j).getX() + Boxes.WIDTH + GAMEBOARD_X
+					&& e.getY() > GameBoard.boxes.get(j).getY() + GAMEBOARD_Y && e.getY() < GameBoard.boxes.get(j).getY() + Boxes.WIDTH + GAMEBOARD_Y)
 			{
 				GameBoard.boxes.get(j).hasClicked(true);
 				System.out.println("box" + j);
