@@ -17,8 +17,8 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	private static final long serialVersionUID = 1L;
 	public static final int WINDOW_WIDTH = 500;
 	public static final int WINDOW_HEIGHT = 550;
-	public static final int GAMEBOARD_X = 80;
-	public static final int GAMEBOARD_Y = 130;
+	public static final int GAMEBOARD_X = (WINDOW_WIDTH / 2) - (GameBoard.BOARD_WIDTH / 2);
+	public static final int GAMEBOARD_Y = (WINDOW_HEIGHT / 2) - (GameBoard.BOARD_HEIGHT / 4);
 	public static final Font main = new Font("Times New Roman", Font.PLAIN, 28);
 
 	private Thread game;
