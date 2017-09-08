@@ -1,3 +1,11 @@
+/* This is the Start file. It constructs the Game object in a JPanel which is in a 
+ * JFrame. This also calls the game to start
+ * 
+ * Created by Jacob Houssian
+ */
+
+
+
 package com.ticTacToe.game;
 
 import javax.swing.JFrame;

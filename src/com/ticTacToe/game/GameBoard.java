@@ -1,3 +1,10 @@
+/* This is the GameBoard class. It creates a BufferedImage of the game grid
+ * and handles all the Boxes objects and draws them on the gameboard Buffered Image
+ * 
+ * Created by Jacob Houssian
+ */
+
+
 package com.ticTacToe.game;
 
 import java.awt.Color;

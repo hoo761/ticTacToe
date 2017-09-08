@@ -1,3 +1,10 @@
+/* This is the Boxes class. It creates the Boxes object that is used as
+ * the boxes on the game board as BufferedImages
+ * 
+ * Created by Jacob Houssian
+ */
+
+
 package com.ticTacToe.game;
 
 import java.awt.Color;
@@ -7,20 +14,18 @@ import java.awt.image.BufferedImage;
 
 public class Boxes 
 {
-	public static final int WIDTH  = 100;
-	public static final int HEIGHT = 100;
+	public static final int WIDTH  = 100;	// Width of the boxes
+	public static final int HEIGHT = 100;	// Height of the boxes
 	
-	private Color boxColor;
-	private Color typeColor;
-	private Font font;
-	private String type;
-	private BufferedImage boxImage;
-	private int x;
-	private int y;
-	private boolean isHovering;
-	private boolean oTurn;
-	private boolean xTurn;
-	private boolean hasClicked;
+	private Color boxColor;				// Color of the box object
+	private Color typeColor;			// Color of the Strings on each box object
+	private Font font;					// Font of Strings on the boxes
+	private String type;				// Used to determine if a box is a "X", "O", or null for a blank box
+	private BufferedImage boxImage;		// BufferedImage for each box
+	private int x;						// X position of each box
+	private int y;						// Y position of each box
+	private boolean isHovering;			// Is set to true if the mouse is on that box, and false when not on the box
+
 	
 	public Boxes(String type, int x, int y)
 	{
@@ -44,12 +49,8 @@ public class Boxes
 			g2d.fillRect(0, 0, WIDTH, HEIGHT);
 		}
 		else
-		{
-			Graphics2D g2d = (Graphics2D) boxImage.getGraphics();
-			
-			g2d.setColor(Color.BLACK);
-			g2d.fillRect(0, 0, WIDTH, HEIGHT);
-		}
+			drawBox();
+		
 		g.drawImage(boxImage, x, y, null);
 	}
 	
@@ -89,26 +90,22 @@ public class Boxes
 		g.dispose();
 	}
 	
+	public void setBox(String type)
+	{
+		isHovering = false;
+		this.type = type;
+	}
+	
+	public String getType()
+	{
+		return type;
+	}
+	
 	public void isHovering(boolean isHovering)
 	{
 		this.isHovering = isHovering;
 	}
-	
-	public void hasClicked(boolean hasClicked)
-	{
-		this.hasClicked = hasClicked;
-	}
-	
-	public void xTurn(boolean xTurn)
-	{
-		this.xTurn = xTurn;
-	}
-	
-	public void oTurn(boolean oTurn)
-	{
-		this.oTurn = oTurn;
-	}
-	
+		
 	public int getX()
 	{
 		return x;

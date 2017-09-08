@@ -1,3 +1,9 @@
+/* This is the Game class. It is the main game object used to handle all
+ * the game objects and put the game together 
+ * 
+ * Created by Jacob Houssian
+ */
+
 package com.ticTacToe.game;
 
 import java.awt.Color;
@@ -25,24 +31,28 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	private GameBoard board;
 	private BufferedImage image = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private boolean running;
-	
 	private boolean shouldRender;
+	private boolean takenSpots[];
 
+	// Game Constructor
 	public Game()
 	{
 		setFocusable(true);
 		setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		
+
+		takenSpots = new boolean[9];
 		board = new GameBoard(GAMEBOARD_X, GAMEBOARD_Y);
 	}
 	
+	
 	public void update()
 	{
-		
+		setTaken();
 	}
 	
+	// Renders game graphics
 	public void render()
 	{
 		Graphics2D g = (Graphics2D) image.getGraphics();
@@ -57,20 +67,20 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		g2d.dispose();	
 	}
 	
+	// Returns Graphics2D object for the main BufferedImage
 	public Graphics2D getGameGraphics()
 	{
 		Graphics2D g = (Graphics2D) image.getGraphics();
 		return g;
 	}
 	
+	// Main game thread
 	public void run() 
 	{	
 		while(running)
 		{
-			shouldRender = true;
-			
-			if(shouldRender)
-				render();
+			update();
+			render();
 		}
 		try 
 	    {
@@ -82,7 +92,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	    }
 	}
 
-
+	// Used with thread
 	public synchronized void start()
 	{
 		if(running) return;
@@ -91,6 +101,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 			game.start();
 	}
 	
+	// Used with thread
 	public synchronized void stop()
 	{
 		if(!running) return;
@@ -98,6 +109,20 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		System.exit(0);
 	}
 
+	public void setTaken()
+	{
+		for(int spot = 0; spot < takenSpots.length; spot ++)
+		{
+			if(!GameBoard.boxes.get(spot).getType().equals("null"))
+			{
+				takenSpots[spot] = true;
+			}
+			else
+			{
+				takenSpots[spot] = false;
+			}
+		}
+	}
 	
 	// MOUSE LISTENER \\
 	
@@ -121,13 +146,17 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	{
 		for(int j = 0; j < 9; j ++)
 		{
-			GameBoard.boxes.get(j).hasClicked(false);
-			
 			if(e.getX() > GameBoard.boxes.get(j).getX() + GAMEBOARD_X && e.getX() < GameBoard.boxes.get(j).getX() + Boxes.WIDTH + GAMEBOARD_X
 					&& e.getY() > GameBoard.boxes.get(j).getY() + GAMEBOARD_Y && e.getY() < GameBoard.boxes.get(j).getY() + Boxes.WIDTH + GAMEBOARD_Y)
 			{
-				GameBoard.boxes.get(j).hasClicked(true);
 				System.out.println("box" + j);
+				GameBoard.boxes.get(j).setBox("O");
+				setTaken();
+				
+				for(int x = 0; x < 9; x ++)
+				{
+					System.out.print(takenSpots[x] + " ");
+				}
 			}
 		}
 	}
