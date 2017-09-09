@@ -31,8 +31,10 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	private GameBoard board;
 	private BufferedImage image = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private boolean running;
-	private boolean shouldRender;
-	private boolean takenSpots[];
+	private boolean win;
+	private String takenBy[];
+	private int[][] winSpots;
+	private int turn;
 
 	// Game Constructor
 	public Game()
@@ -41,8 +43,11 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
 		addMouseListener(this);
 		addMouseMotionListener(this);
-
-		takenSpots = new boolean[9];
+		setWinSpots();
+		
+		win = false;
+		takenBy = new String[9];
+		turn = 1;
 		board = new GameBoard(GAMEBOARD_X, GAMEBOARD_Y);
 	}
 	
@@ -50,6 +55,8 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	public void update()
 	{
 		setTaken();
+		
+		checkWin();
 	}
 	
 	// Renders game graphics
@@ -77,7 +84,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	// Main game thread
 	public void run() 
 	{	
-		while(running)
+		while(running && !win)
 		{
 			update();
 			render();
@@ -111,17 +118,87 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 
 	public void setTaken()
 	{
-		for(int spot = 0; spot < takenSpots.length; spot ++)
+		for(int spot = 0; spot < takenBy.length; spot ++)
 		{
 			if(!GameBoard.boxes.get(spot).getType().equals("null"))
 			{
-				takenSpots[spot] = true;
+				GameBoard.boxes.get(spot).isTaken(true);
+				takenBy[spot] = GameBoard.boxes.get(spot).getType();
 			}
 			else
 			{
-				takenSpots[spot] = false;
+				takenBy[spot] = GameBoard.boxes.get(spot).getType();
 			}
 		}
+	}
+	
+	public String getType()
+	{
+		if(turn % 2 == 0)
+			return "O";
+		else
+			return "X";
+	}
+	
+	public void checkWin()
+	{
+		checkWinX();
+		checkWinO();
+	}
+	
+	public void checkWinX()
+	{
+		for(int x = 0; x < 8; x++)
+		{
+			int amount = 0;
+			for(int y = 0; y < 3; y++)
+			{
+				if(GameBoard.boxes.get(winSpots[x][y]).getType().equals("X"))
+				{
+					amount++;
+				}
+				if(amount == 3)
+				{
+					System.out.println("X WIN");
+					//win = true;
+				}
+			}
+		}
+	}
+	
+	public void checkWinO()
+	{
+		for(int x = 0; x < 8; x++)
+		{
+			int amount = 0;
+			for(int y = 0; y < 3; y++)
+			{
+				if(GameBoard.boxes.get(winSpots[x][y]).getType().equals("O"))
+				{
+					amount++;
+				}
+				if(amount == 3)
+				{
+					System.out.println("O WIN");
+					//win = true;
+				}
+			}
+		}
+	}
+	
+	public void setWinSpots()
+	{
+		winSpots = new int[][]
+		{
+			{0, 1, 2},
+			{3, 4, 5},
+			{6, 7, 8},
+			{0, 3, 6},
+			{1, 4, 7}, 
+			{2, 5, 8},
+			{0, 4, 8},
+			{2, 4, 6}
+		};
 	}
 	
 	// MOUSE LISTENER \\
@@ -150,12 +227,12 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 					&& e.getY() > GameBoard.boxes.get(j).getY() + GAMEBOARD_Y && e.getY() < GameBoard.boxes.get(j).getY() + Boxes.WIDTH + GAMEBOARD_Y)
 			{
 				System.out.println("box" + j);
-				GameBoard.boxes.get(j).setBox("O");
+				GameBoard.boxes.get(j).setBox(getType());
 				setTaken();
-				
+				turn ++;
 				for(int x = 0; x < 9; x ++)
 				{
-					System.out.print(takenSpots[x] + " ");
+					System.out.print(takenBy[x] + " ");
 				}
 			}
 		}

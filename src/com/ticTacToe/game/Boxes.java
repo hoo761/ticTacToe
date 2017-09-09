@@ -25,6 +25,7 @@ public class Boxes
 	private int x;						// X position of each box
 	private int y;						// Y position of each box
 	private boolean isHovering;			// Is set to true if the mouse is on that box, and false when not on the box
+	private boolean isTaken;			// Is set to true if the spot is taken
 
 	
 	public Boxes(String type, int x, int y)
@@ -34,6 +35,7 @@ public class Boxes
 		this.y = y;
 		font = new Font("", Font.BOLD, 50);
 		isHovering = false;
+		isTaken = false;
 		
 		boxImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		drawBox();
@@ -41,7 +43,7 @@ public class Boxes
 	
 	public void render(Graphics2D g)
 	{
-		if(isHovering)
+		if(isHovering && !isTaken)
 		{
 			Graphics2D g2d = (Graphics2D) boxImage.getGraphics();
 			
@@ -104,6 +106,11 @@ public class Boxes
 	public void isHovering(boolean isHovering)
 	{
 		this.isHovering = isHovering;
+	}
+	
+	public void isTaken(boolean isTaken)
+	{
+		this.isTaken = isTaken;
 	}
 		
 	public int getX()
