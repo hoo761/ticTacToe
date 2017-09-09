@@ -112,6 +112,11 @@ public class Boxes
 	{
 		this.isTaken = isTaken;
 	}
+	
+	public boolean getTaken()
+	{
+		return isTaken;
+	}
 		
 	public int getX()
 	{

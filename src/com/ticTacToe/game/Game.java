@@ -227,9 +227,12 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 					&& e.getY() > GameBoard.boxes.get(j).getY() + GAMEBOARD_Y && e.getY() < GameBoard.boxes.get(j).getY() + Boxes.WIDTH + GAMEBOARD_Y)
 			{
 				System.out.println("box" + j);
-				GameBoard.boxes.get(j).setBox(getType());
-				setTaken();
-				turn ++;
+				if(!GameBoard.boxes.get(j).getTaken())
+				{
+					GameBoard.boxes.get(j).setBox(getType());
+					setTaken();
+					turn ++;
+				}
 				for(int x = 0; x < 9; x ++)
 				{
 					System.out.print(takenBy[x] + " ");
