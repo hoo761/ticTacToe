@@ -39,7 +39,7 @@ public class GameBoard
 		createBoardImage();
 	}
 	
-	private void createBoardImage()
+	public void createBoardImage()
 	{
 		Graphics2D g = (Graphics2D) gameBoard.getGraphics();
 		g.setColor(new Color(0, 255, 0));

@@ -33,7 +33,7 @@ public class Boxes
 		this.type = type;
 		this.x = x;
 		this.y = y;
-		font = new Font("", Font.BOLD, 50);
+		font = new Font("Impact", Font.BOLD, 70);
 		isHovering = false;
 		isTaken = false;
 		
@@ -47,7 +47,10 @@ public class Boxes
 		{
 			Graphics2D g2d = (Graphics2D) boxImage.getGraphics();
 			
-			g2d.setColor(Color.YELLOW);
+			if(Game.turn % 2 == 1)
+				g2d.setColor(new Color(255, 110, 199));
+			else
+				g2d.setColor(Color.CYAN);
 			g2d.fillRect(0, 0, WIDTH, HEIGHT);
 		}
 		else
@@ -63,29 +66,29 @@ public class Boxes
 		
 		if(type.equals("X"))
 		{
-			boxColor = new Color(250, 0, 0);
-			typeColor = new Color(0, 0, 250);
+			boxColor = Color.BLACK;
+			typeColor = new Color(255, 110, 199);
 			
 			g.setColor(boxColor);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			
 			g.setColor(typeColor);
-			g.drawString(type, 35, 60);
+			g.drawString(type, 30, 75);
 		}
 		else if(type.equals("O"))
 		{
-			boxColor = new Color(0, 0, 250);
-			typeColor = new Color(250, 0, 0);
+			boxColor = Color.BLACK;
+			typeColor = Color.CYAN;
 			
 			g.setColor(boxColor);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 			
 			g.setColor(typeColor);
-			g.drawString(type, 30, 60);
+			g.drawString(type, 30, 75);
 		}
 		else
 		{
-			g.setColor(new Color(0, 0, 0));
+			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, WIDTH, HEIGHT);
 		}
 		
