@@ -128,7 +128,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 		if(running) return;
 		running = true;
 		game = new Thread(this, "game");	
-			game.start();
+		game.start();
 	}
 	
 	// Used with thread
