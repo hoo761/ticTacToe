@@ -39,7 +39,7 @@ public class Game extends JPanel implements MouseListener, MouseMotionListener, 
 	private String takenBy[];
 	private int[][] winSpots;
 	private int xWins;
-	private int oWins;
+	private int oWins;	// Determines if o wins
 
 	// Game Constructor
 	public Game()
